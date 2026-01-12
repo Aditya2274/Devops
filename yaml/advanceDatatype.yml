@@ -1,0 +1,84 @@
+student: !!seq
+  -marks
+  -name
+  -roll_no
+
+#like this also
+cities: [new delhi,mumbai]
+
+#some of the keys of the seq will be empty, i.e c/a sparse seq
+sparse seq:
+  -hey
+  -how
+  -
+  -Null
+  -sup
+
+#nested sequence
+seq:
+-
+  -mango
+  -apple
+  -banana
+-
+  -marks
+  -roll num
+  -date 
+
+#key : value pairs are called maps
+!!map 
+
+#nested mappings: map within an map
+name: Aditya Ashok Singh 
+role:
+  age: 21
+  job: student
+
+#same as
+name: Aditya Ashok Singh
+role: {age: 78, job: student}
+
+#pairs: keys may have duplicate values
+# !!pairs
+
+pair example: !!pairs
+  -job: student
+  -iob: teacher
+#this will be an array of hash tables
+
+# !!set will allow you to have unique values
+names: !!set
+  ? Kunal
+  ? Apporv
+  ? Rahul
+
+#  dictionary, like for a key you want a sequence as value !!omap
+People: !!omap
+  - Aditya:
+    name: Aditya Ashok Singh
+    age: 21
+    height: 78
+  - Rahul:
+    name: Rahul XYZ
+    age: 50
+    height: 32
+
+#reusing some properties using anchors(what you want to copy and where u want to copy it)
+likings: &likes
+  fav fruit: mango
+  dislikes: grapes
+
+person1:
+  name: Aditya Ashok Singh
+  <<: *likes
+
+person2:
+  name: Rahul
+  <<: *likes
+  dislikes: Berries #this dislike : berries will override dislikes: grapes
+
+#person2 will look like
+# person2:
+#   name: Rahul
+#   fav fruit: mango
+#   dislikes: Berries

@@ -1,0 +1,39 @@
+# String variables
+myself: Aditya Ashok Singh
+fruit: "apple"
+job: 'swe'
+bio: |
+  hey my name is Aditya.
+  I am B.Tech CSE student.
+# write a single line into multiple lines
+message: >
+  this will
+  all be 
+  in one single line
+#same as
+message1: !!str this will be in one single line 
+
+number: 5473
+marks: 98.76
+booleanValue: !!bool No #n,N,false,False,FALSE
+#same for true -> yes, y, Y
+
+#We can specify the type of datatype as well
+zero: !!int 0
+positiveNum: !!int 45
+negativeNum: !!int -45
+binarynum: !!int 0b11001
+octalnum: !!int 0x45
+commaValue: !!int +540_000 #540,000
+exponential numbers: 6.023E56
+
+#floating numbers
+marks: !!float 56.89
+infinite: !!float .inf 
+not a num: .nan 
+
+#null
+surname: !!null Null # or null/NULL/~
+~: this is a null key
+
+#dates and time 
