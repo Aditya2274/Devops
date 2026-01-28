@@ -65,3 +65,24 @@ about a name that we can give to it, so it'd be easy for even us to refer to..
 ->docker build -t Name:<version> . here -t is tagging that version_id is tagged with the name
 The use of version is , if u just change the version , u can still use the same name for building images.Real life scenarios , like an app upgraded version we want to containerise and for that we won't just create a new image so we just change the version number
 -> docker rmi Name:<version> to remove a specific image tagged with a specific version  
+aditya-2274@aditya-2274-IdeaPad-3-15IAU7:~/Documents/devops/Docker/demo$ docker image ls
+i Info →   U  In Use
+IMAGE     ID             DISK USAGE   CONTENT SIZE   EXTRA
+demo:01   61dc64ca8cdf        1.7GB          429MB      
+
+aditya-2274@aditya-2274-IdeaPad-3-15IAU7:~/Documents/devops/Docker/demo$ docker run -d --rm --name "demo" -p 3001:5173 demo:
+01
+099dba7dc599d86a791feed53e09a69b096a62b04538968470d4d47464473347
+aditya-2274@aditya-2274-IdeaPad-3-15IAU7:~/Documents/devops/Docker/demo$ docker ps
+CONTAINER ID   IMAGE     COMMAND                  CREATED         STATUS         PORTS                                         NAMES
+099dba7dc599   demo:01   "docker-entrypoint.s…"   5 seconds ago   Up 5 seconds   0.0.0.0:3001->5173/tcp, [::]:3001->5173/tcp   demo
+This right here is my example , a react app created using vite , running on container name demo version 1
+
+_Pre-defined Images_
+ ->docker pull Image_Name
+ -> docker run -d -p <your_custom_port>:<image_default_port> image_name:latest
+ This way you can use pre-defined images for you use
+ One more thing , before using docker pull <Image-name> make sure to login via cli , by docker login
+
+ _Docker-Container-With-Interactive-Mode_
+ 
