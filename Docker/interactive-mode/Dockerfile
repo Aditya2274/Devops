@@ -1,7 +1,7 @@
 FROM python:latest
 
-WORKDIR /interactive-mode
+WORKDIR /myapp
 
-COPY . .
+COPY ./myapp.py .
 
 CMD ["python","myapp.py"]
