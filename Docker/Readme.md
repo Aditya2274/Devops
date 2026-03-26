@@ -161,3 +161,5 @@ Now, my_web_image:v2 contains all your new changes hardcoded into it, and you ca
 
 ->__.dockerignore__
 The things you don't want in the image build up just simply put into this .dockerignore, and they won't be build into the images
+
+__Docker Network__
