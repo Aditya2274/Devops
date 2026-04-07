@@ -1,0 +1,1 @@
+print("Hello from optimized docker app")

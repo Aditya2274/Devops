@@ -1,0 +1,1 @@
+Bad Dockerfile build time: 7.42 seconds
