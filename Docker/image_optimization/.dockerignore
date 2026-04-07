@@ -4,5 +4,4 @@ __pycache__
 *.pyd
 .git
 .gitignore
-Dockerfile.bad
 README.md
