@@ -1,0 +1,29 @@
+services:
+  postgres:
+    image: postgres:15
+    container_name: fintech_postgres
+    restart: always
+    environment:
+      POSTGRES_DB: fintechdb
+      POSTGRES_USER: fintechuser
+      POSTGRES_PASSWORD: fintechpass
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  springboot:
+    build: ./app
+    container_name: fintech_springboot
+    restart: always
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/fintechdb
+      SPRING_DATASOURCE_USERNAME: fintechuser
+      SPRING_DATASOURCE_PASSWORD: fintechpass
+    depends_on:
+      - postgres
+
+volumes:
+  postgres_data:
