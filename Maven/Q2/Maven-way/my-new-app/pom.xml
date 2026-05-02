@@ -7,7 +7,15 @@
   <version>1.0-SNAPSHOT</version>
   <name>my-new-app</name>
   <url>http://maven.apache.org</url>
+
+  <properties>
+    <maven.compiler.source>21</maven.compiler.source> <!-- Or 11, 17, 21 depending on your JDK -->
+    <maven.compiler.target>21</maven.compiler.target>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+
   <dependencies>
+    <!-- Your dependencies here -->
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
