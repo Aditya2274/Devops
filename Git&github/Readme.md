@@ -264,3 +264,19 @@ Writing shell scripts
 Building CI/CD pipelines
 Debugging Git issues
 Handling dynamic paths + versions
+
+Yes, `fetch-depth` can be set to more than just 0 or 1. It accepts any positive integer representing the number of commits you want to download from your Git history. 
+
+Here is how the different levels work:
+
+*   **`fetch-depth: 1` (The Default)**
+    *   **What it does:** Performs a "shallow clone." It downloads only the single most recent commit of the branch that triggered the workflow.
+    *   **Use case:** Best for typical builds, compiling, or running unit tests where previous Git history is irrelevant. It makes the checkout process incredibly fast.
+*   **`fetch-depth: 0`**
+    *   **What it does:** Performs a "full clone." It downloads the exact state of your repository, including all commits, branches, and tags from the beginning of time.
+    *   **Use case:** Required for tools like your Git Analyzer, code quality scanners (like SonarQube), or automated changelog generators that need to read past commits or compare across branches.
+*   **`fetch-depth: N` (e.g., 2, 10, 50)**
+    *   **What it does:** Fetches exactly *N* commits of history.
+    *   **Use case:** If you set it to `fetch-depth: 2`, it fetches the current commit and the commit immediately before it. This is frequently used when a CI/CD pipeline needs to run a `git diff HEAD~1` to see exactly which files changed between the latest push and the previous one (for example, to only run tests on modified files). 
+
+In short, it dictates how deeply Git should look back into the repository's past during the checkout phase.
