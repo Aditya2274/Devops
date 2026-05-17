@@ -73,3 +73,261 @@ If you'd like, I can:
 
 Tell me which follow-up you'd prefer and I'll implement it.
 
+__Port managing(in linux)__:
+Once you understand ports properly, debugging servers becomes 10x easier.
+
+Let’s make this crystal clear.
+
+🧠 What Is A Port?
+
+Think of your system like:
+
+IP Address = Building
+Ports = Room numbers
+
+Example:
+
+localhost:3000
+
+means:
+
+your computer → room 3000
+
+A process/app binds itself to a port.
+
+🚨 Why Port Conflicts Happen
+
+Suppose:
+
+Node app uses 3000
+
+Then another app also tries:
+
+listen on 3000
+
+Linux says:
+
+Port already in use
+
+because:
+
+only ONE process can bind to a port at a time.
+
+🔥 MOST IMPORTANT COMMANDS
+
+These are the REAL commands you must know.
+
+1️⃣ See Which Process Uses A Port
+Modern command:
+sudo lsof -i :3000
+
+Example output:
+
+node    12345 user   23u  IPv4 ...
+
+Meaning:
+
+Node app
+PID = 12345
+using port 3000
+2️⃣ Kill Process Using Port
+kill -9 12345
+
+Now port becomes free.
+
+🚀 Faster One-Liner
+sudo kill -9 $(sudo lsof -t -i:3000)
+
+Kills whatever uses port 3000.
+
+VERY useful.
+
+3️⃣ See All Listening Ports
+sudo ss -tulnp
+
+Modern replacement for netstat.
+
+Shows:
+
+TCP
+UDP
+listening ports
+process names
+4️⃣ Filter Specific Port
+sudo ss -tulnp | grep 8080
+
+Useful for:
+
+Jenkins
+Node
+Docker
+nginx
+🧠 Common Dev Ports
+Service	Port
+React/Vite	5173
+Node/Express	3000
+MongoDB	27017
+MySQL	3306
+Jenkins	8080
+nginx	80
+HTTPS	443
+SSH	22
+Docker Registry	5000
+🚀 Changing Ports
+Node/Express
+app.listen(5000)
+React/Vite
+npm run dev -- --port 4000
+Jenkins
+
+Edit:
+
+/etc/default/jenkins
+
+Find:
+
+HTTP_PORT=8080
+
+Change to:
+
+HTTP_PORT=9090
+
+Restart:
+
+sudo systemctl restart jenkins
+Docker Port Mapping
+
+VERY important.
+
+Example:
+
+docker run -p 8081:8080 image
+
+Meaning:
+
+Host	Container
+8081	8080
+
+So browser uses:
+
+localhost:8081
+
+while app inside container still uses:
+
+8080
+🚨 VERY Common Problem
+
+You close terminal but app still runs.
+
+Example:
+
+Node server still alive
+Vite still alive
+Docker container still alive
+
+Then next run:
+
+EADDRINUSE
+
+means:
+
+address already in use.
+
+🔥 How To Debug Properly
+Step 1
+
+Check port:
+
+sudo lsof -i :3000
+Step 2
+
+See process:
+
+PID
+Step 3
+
+Kill:
+
+kill -9 PID
+Step 4
+
+Restart app.
+
+🧠 Docker Port Understanding
+Container Port vs Host Port
+
+Example:
+
+docker run -p 9000:8080 jenkins
+
+means:
+
+Machine	Container
+localhost:9000	container:8080
+
+Browser:
+
+localhost:9000
+
+Container internally:
+
+8080
+
+VERY important concept.
+
+🔥 How To See Docker Containers Using Ports
+docker ps
+
+Example:
+
+0.0.0.0:8080->8080/tcp
+
+means:
+
+host 8080
+mapped to container 8080
+🚀 Stop Docker Container
+docker stop container_id
+
+or:
+
+docker stop container_name
+🧠 Best Practices
+Development
+
+Use:
+
+3000
+5173
+8080
+Multiple Apps
+
+Use:
+
+3001
+3002
+8081
+8082
+Production
+
+Usually:
+
+nginx → 80/443
+backend internal ports hidden
+🚀 MOST IMPORTANT DEVOPS UNDERSTANDING
+
+Port conflict means:
+
+two processes trying to occupy same network socket.
+
+That’s all.
+
+🏆 Commands You ABSOLUTELY Must Remember
+Find process using port
+sudo lsof -i :PORT
+Kill process
+kill -9 PID
+See listening ports
+sudo ss -tulnp
+Docker running containers
+docker ps
