@@ -280,3 +280,33 @@ Here is how the different levels work:
     *   **Use case:** If you set it to `fetch-depth: 2`, it fetches the current commit and the commit immediately before it. This is frequently used when a CI/CD pipeline needs to run a `git diff HEAD~1` to see exactly which files changed between the latest push and the previous one (for example, to only run tests on modified files). 
 
 In short, it dictates how deeply Git should look back into the repository's past during the checkout phase.
+Q)while i have unstaged changes in a git repo, and i do git pull, i see a warning there are unstaged changes how do i deal with them efficiently?
+Soln.When you have unstaged changes and need to run git pull, Git prevents the pull to protect your uncommitted work from being overwritten.
+
+Here are the most efficient ways to deal with this, depending on what you want to do with your changes:
+
+1. The most efficient way: Autostash (Keep your changes)
+If you want to pull the latest updates and keep your current work-in-progress, you can tell Git to automatically stash your changes, pull, and then apply them back.
+
+(Optional: You can also use git pull --rebase --autostash if you prefer a clean, linear commit history).
+
+2. The traditional way: Manual Stash
+If you want more control over the stash process, you can do it manually in three steps:
+
+Note: If the incoming changes modify the same lines as your unstaged changes, you might get a merge conflict when popping the stash, which you will need to resolve manually.
+
+3. Commit your changes first
+If your current changes are complete and ready to be saved, simply commit them before pulling:
+
+4. Discard your changes
+If you were just experimenting and do not want to keep your unstaged changes, you can discard them entirely and then pull:
+git restore .      # Discards unstaged changes
+git pull
+
+If you have unstaged changes, git restore . will discard those modifications and revert your files in the working directory back to exactly how they were in your latest commit (or the index/staging area).
+
+Here is how it behaves specifically:
+
+git restore . or git restore <file>: Discards unstaged changes. Your file goes back to the state of the last commit. (Warning: This action cannot be undone).
+git restore --staged <file>: If you have already added (staged) a file, this simply unstages it. It leaves your actual modifications intact in your working directory.
+Untracked files: git restore does not delete newly created files that Git isn't tracking yet. You would need git clean -fd to remove those.
