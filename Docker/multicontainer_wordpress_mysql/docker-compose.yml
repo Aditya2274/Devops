@@ -16,7 +16,7 @@ services:
     container_name: wordpress_app
     restart: always
     ports:
-      - "8080:80"
+      - "8081:80"
     environment:
       WORDPRESS_DB_HOST: mysql:3306
       WORDPRESS_DB_USER: wpuser

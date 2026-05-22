@@ -170,3 +170,5 @@ A Docker network is the system that allows your containers to communicate with e
 
 __Docker Compose__
 YAML based Configuration file to manage multiple containers running on the same machine.
+Docker Compose files are written in YAML. In YAML, the top-level elements (like services:, volumes:, and networks:) are treated like items in a dictionary or a map. The parser doesn't care what order you put these top-level keys in; it only cares about their nested contents and relationships.
+__Note__: depends_on simply controls the startup order of the containers, not the readiness of the applications inside them.
