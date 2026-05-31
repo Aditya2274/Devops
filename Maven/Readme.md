@@ -15,6 +15,12 @@ mvn archetype:generate -DgroupId=com.example -DartifactId=my-new-app -Darchetype
 
 2) using maven wrapper
 It is basically "Wrapper Inception."
+The Modern Way (Maven 3.7.0 and newer)
+
+If you are using a relatively recent version of Maven globally on your system, the wrapper plugin is now built-in natively. You don't need to download external plugins.
+Bash
+
+mvn wrapper:wrapper
 
 You are using the existing wrapper to build the new project, stepping inside the new project, and immediately building a new wrapper for it.
 
