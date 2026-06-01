@@ -1,0 +1,15 @@
+<project>
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>quizzer-ecosystem.example</groupId>
+        <artifactId>quizzer-ecosystem.app</artifactId>
+        <version>1.0.0</version>
+    </parent>
+    <artifactId>studentservice</artifactId>
+    <dependencies>
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-core</artifactId>
+        </dependency>
+    </dependencies>
+</project>
